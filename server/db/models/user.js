@@ -11,10 +11,19 @@ const userSchema = new Schema({
 		username: { type: String, unique: false, required: false },
 		password: { type: String, unique: false, required: false }
 	},
+	address: {
+		street: {type: String, required: false},
+		city: {type: String, require: false},
+		state: {type: String, required: true},
+		zip: {type: int, required: true}
+	},
+	cityDuration: { type: int, required: true},
+	email: {type: String, required: true},
+
 	google: {
 		googleId: { type: String, required: false }
 	},
-	photos: []
+	photos: [],
 	// local: {
 	// 	email: { type: String, unique: true },
 	// 	password: { type: String }
@@ -25,6 +34,9 @@ const userSchema = new Schema({
 	// },
 	// firstName: { type: String },
 	// lastName: { type: String }
+
+	busId: [{}],
+	posts: [{}],
 })
 
 // Define schema methods
