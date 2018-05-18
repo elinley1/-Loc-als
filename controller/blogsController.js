@@ -23,4 +23,14 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/populate");
 
-db.Business.create
+db.Business.create({ _id: "id"})
+    .then(function (dbBlog) {
+        return db.Blog.findOneAndUpdate({}, {$push: {blogs: dblog._id}})
+    })
+    .then(function(dbBlog) {
+        res.json(dbBlog);
+    })
+    .catch(function (err) {
+        res.json(err);
+    });
+
