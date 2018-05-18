@@ -31,9 +31,15 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
 
-    sortByLongest: function (req, res)
+    sortByLongest: function (req, res) {
+        db.User
+        .find({})
+        .sort([['cityDuration', -1]])
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+    },
 
-    create: function (req, res){
+    create: function (req, res) {
         db.User
         .create(req.body)
         .then(dbUser => res.json(dbUser))
@@ -43,7 +49,7 @@ module.exports = {
     update: function (req, res) {
         db.User
         .findOneAndUpdate({'username': req.body.username}, req.body)
-        .then(dbUser => res.json(dbModel))
-        .catch(err => res.statu(422).json(err));
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     },
 }

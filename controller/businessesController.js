@@ -24,22 +24,24 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/populate");
 
 module.exports = {
-    create: function (req, res) {
-        db.Blog.create(req.body)
-            .then(function (dbBlog) {
-                return db.Business.findOneAndUpdate({}, { $push: { blogs: dbBlog._id } })
-            })
-            .then(function (dbBlog) {
-                res.json(dbBlog);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
+    findByCity: function (req, res) {
+        db.Business
+        .find(req.params.city)
+        .then(dbBusiness => res.json(dbBusiness))
+        .catch(err => res.status(422).json(err));
     },
 
-    findBusiness: function (req,res) {
-        db.Blog
-        .findById(req.params.id)
-    }
+    create: function (req, res) {
+        db.Business
+        .create(req.body)
+        .then(dbBusiness => res.json(dbBusiness))
+        .catch(err => res.status(422).json(err));
+    },
 
+    update: function (req, res) {
+        db.Business
+        .create(req.body)
+        .then(dbBusiness => res.json(dbBusiness))
+        .catch(err => res.status(422).json(err));
+    }
 }
