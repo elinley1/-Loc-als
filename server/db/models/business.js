@@ -7,8 +7,7 @@ mongoose.promise = Promise
 
 // Define userSchema
 const userSchema = new Schema({
-	firstName: { type: String, unique: false },
-	lastName: { type: String, unique: false },
+	busName: { type: String, required: true},
 	local: {
 		username: { type: String, unique: false, required: false },
 		password: { type: String, unique: false, required: false }
@@ -16,6 +15,18 @@ const userSchema = new Schema({
 	google: {
 		googleId: { type: String, required: false }
 	},
+	address: {
+		street: {type: String, required: false},
+		city: {type: String, require: false},
+		state: {type: String, required: true},
+		zip: {type: int, required: true}
+	},
+	email: {type: String, required: true},
+
+	description: {type: String, required: false},
+	
+	blogId: [{}],
+
 	photos: []
 	// local: {
 	// 	email: { type: String, unique: true },
@@ -30,7 +41,7 @@ const userSchema = new Schema({
 })
 
 // Define schema methods
-userSchema.methods = {
+businessSchema.methods = {
 	checkPassword: function(inputPassword) {
 		return bcrypt.compareSync(inputPassword, this.local.password)
 	},
@@ -40,7 +51,7 @@ userSchema.methods = {
 }
 
 // Define hooks for pre-saving
-userSchema.pre('save', function(next) {
+businessSchema.pre('save', function(next) {
 	if (!this.local.password) {
 		console.log('=======NO PASSWORD PROVIDED=======')
 		next()
@@ -53,5 +64,5 @@ userSchema.pre('save', function(next) {
 })
 
 // Create reference to User & export
-const User = mongoose.model('User', userSchema)
-module.exports = User
+const Business = mongoose.model('Business', businessSchema)
+module.exports = Business
