@@ -15,7 +15,7 @@ const userSchema = new Schema({
 		street: {type: String, required: false},
 		city: {type: String, require: false},
 		state: {type: String, required: true},
-		zip: {type: int, required: true}
+		zip: {type: String, required: true}
 	},
 	cityDuration: { type: int, required: true},
 	email: {type: String, required: true},

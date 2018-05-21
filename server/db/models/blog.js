@@ -9,7 +9,7 @@ mongoose.promise = Promise
 const userSchema = new Schema({
 	title: {type: String},
 	body: {type: String, required: true},
-	rating: {type: int, required: true},
+	rating: {type: String, required: true},
 
 	google: {
 		googleId: { type: String, required: false }
