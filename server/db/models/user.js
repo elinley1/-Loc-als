@@ -17,7 +17,7 @@ const userSchema = new Schema({
 		state: {type: String, required: true},
 		zip: {type: String, required: true}
 	},
-	cityDuration: { type: int, required: true},
+	cityDuration: { type: String, required: true},
 	email: {type: String, required: true},
 
 	google: {
