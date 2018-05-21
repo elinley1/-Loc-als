@@ -1,50 +1,39 @@
 {
-  "name": "react-template",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.16.2",
-    "bcrypt": "^1.0.3",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "connect-mongo": "^1.3.2",
-    "dotenv": "^4.0.0",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "mongoose": "^4.13.13",
-    "morgan": "^1.9.0",
-    "passport": "^0.3.2",
-    "passport-google-oauth": "^1.0.0",
-    "passport-google-oauth2": "^0.1.6",
-    "passport-google-oauth20": "^1.0.0",
-    "passport-local": "^1.0.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.6.2",
-    "react-router-dom": "^4.2.2"
-  },
-  "devDependencies": {
-    "concurrently": "^3.5.0",
-    "react-scripts": "1.0.7"
-  },
-  "scripts": {
-    "start": "export NODE_ENV=\"production\" && node server/server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
-    "prod": "export NODE_ENV=\"production\" && nodemon server/server.js"
-  },
-  "proxy": "http://localhost:8080",
-  "description": "(Loc)als is an app that allows destinations (restaurants, museums, hiking trails, tourist areas, etc.) to post information in a profile about their business as a way to advertise to potential clients. Users are then able to create profiles in the app and validate which area they live in. User will then get a list of destinations' profiles near them and have the opportunity to compose a short \"blog\" about their interaction with the destination including a rating. Tourists can go on to search for cities and see different destination profiles with the ratings from the blogs from the users.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elinley1/-Loc-als.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/elinley1/-Loc-als/issues"
-  },
-  "homepage": "https://github.com/elinley1/-Loc-als#readme"
+	"name": "react-template",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@material-ui/core": "^1.0.0",
+		"axios": "^0.16.2",
+		"bcrypt": "^1.0.2",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.17.2",
+		"connect-mongo": "^1.3.2",
+		"dotenv": "^4.0.0",
+		"express": "^4.15.3",
+		"express-session": "^1.15.4",
+		"mongoose": "^4.11.4",
+		"morgan": "^1.8.2",
+		"passport": "^0.3.2",
+		"passport-google-oauth": "^1.0.0",
+		"passport-google-oauth20": "^1.0.0",
+		"passport-local": "^1.0.0",
+		"react": "^15.6.2",
+		"react-bootstrap": "^0.32.1",
+		"react-dom": "^15.6.2",
+		"react-router-dom": "^4.1.2"
+	},
+	"devDependencies": {
+		"concurrently": "^3.5.0",
+		"react-scripts": "1.0.7"
+	},
+	"scripts": {
+		"start": "export NODE_ENV=\"production\" && node server/server.js",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
+		"prod": "export NODE_ENV=\"production\" && nodemon server/server.js"
+	},
+	"proxy": "http://localhost:8080"
 }
