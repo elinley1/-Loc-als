@@ -8,17 +8,17 @@ const userSchema = new Schema({
 	firstName: { type: String, unique: false },
 	lastName: { type: String, unique: false },
 	local: {
-		username: { type: String, unique: false, required: false },
-		password: { type: String, unique: false, required: false }
+		username: { type: String, unique: true, required: true },
+		password: { type: String, unique: false, required: true }
 	},
 	address: {
 		street: {type: String, required: false},
 		city: {type: String, require: false},
-		state: {type: String, required: true},
-		zip: {type: String, required: true}
+		state: {type: String, required: false},
+		zip: {type: String, required: false}
 	},
-	cityDuration: { type: String, required: true},
-	email: {type: String, required: true},
+	cityDuration: { type: String, required: false},
+	email: {type: String, required: false},
 
 	google: {
 		googleId: { type: String, required: false }
