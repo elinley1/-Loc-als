@@ -6,7 +6,7 @@ import LoginForm from './components/Login/LoginForm'
 import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
-import Blogs from './components/Pages/Blog'
+import Blogs from './Pages/Blog'
 
 const DisplayLinks = props => {
 	if (props.loggedIn) {
