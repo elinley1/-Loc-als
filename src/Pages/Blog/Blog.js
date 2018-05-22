@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../../Grid";
-import { Input, TextArea, FormBtn } from "../../Form";
+import { Col, Row, Container } from "../../components/Grid";
+import { Input, TextArea, FormBtn } from "../../components/Form";
 
 
 class Blog extends Component {
