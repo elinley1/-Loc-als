@@ -14,7 +14,7 @@ const DisplayLinks = props => {
 				<ul className="nav">
 					<li className="nav-item">
 						<Link to="/" className="nav-link">
-							Home
+							Home-Test
 						</Link>
 					</li>
 					<li>
