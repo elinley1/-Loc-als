@@ -73,4 +73,4 @@ class BusinessPage extends Component {
   }
 }
 
-export default Books;
+export default BusinessPage;
