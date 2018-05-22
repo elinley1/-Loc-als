@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Jumbotron from "../../components/Jumbotron";
-import API from "../../utils/API";
+import API from "/../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
@@ -39,13 +39,13 @@ class BusinessPage extends Component {
             </Jumbotron>
             <div>
                 <panel.heading>Address</panel.heading>
-                <panel.body>{business.address}</panel.body>
+                <panel.body>{this.state.address}</panel.body>
                 <panel.heading>Email</panel.heading>
-                <panel.body>{business.email}</panel.body>
+                <panel.body>{this.state.email}</panel.body>
                 <panel.heading>Username of "Owner"</panel.heading>
-                <panel.body>{business.username}</panel.body>
+                <panel.body>{this.state.username}</panel.body>
                 <panel.heading>Description</panel.heading>
-                <panel.body>{business.description}</panel.body>
+                <panel.body>{this.state.description}</panel.body>
             </div>                
          
           </Col>
