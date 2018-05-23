@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import {FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button} from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import { Col, Row, Container } from "../components/Grid";
+import { Input, TextArea, FormBtn } from "../components/Form";
 
 class SignupForm extends Component {
 	constructor() {
@@ -21,7 +24,7 @@ class SignupForm extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-		// TODO - validate!
+		// TODO - add validation
 		axios
 			.post('/auth/signup', {
 				firstName: this.state.firstName,
@@ -53,88 +56,96 @@ class SignupForm extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		}
 		return (
-			<div className="SignupForm">
+			<Container>
 				<h1>Signup form</h1>
-				<label htmlFor="firstName">First Name: </label>
-				<input
-					type="text"
-					name="firstName"
-					value={this.state.firstName}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="lastName">Last Name: </label>
-				<input
-					type="text"
-					name="lastName"
-					value={this.state.lastName}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="username">Username: </label>
-				<input
-					type="text"
-					name="username"
-					value={this.state.username}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="password">Password: </label>
-				<input
-					type="password"
-					name="password"
-					value={this.state.password}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="confirmPassword">Confirm Password: </label>
-				<input
-					type="password"
-					name="confirmPassword"
-					value={this.state.confirmPassword}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="street">Street Address: </label>
-				<input
-					type="text"
-					name="street"
-					value={this.state.street}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="city">City: </label>
-				<input
-					type="text"
-					name="city"
-					value={this.state.city}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="state">State: </label>
-				<input
-					type="text"
-					name="state"
-					value={this.state.state}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="zip">Zip: </label>
-				<input
-					type="text"
-					name="zip"
-					value={this.state.zip}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="cityDuration">City Duration: </label>
-				<input
-					type="cityDuration"
-					name="cityDuration"
-					value={this.state.cityDuration}
-					onChange={this.handleChange}
-				/>
-				<label htmlFor="email">Email: </label>
-				<input
-					type="text"
-					name="email"
-					value={this.state.email}
-					onChange={this.handleChange}
-				/>
-				<button onClick={this.handleSubmit}>Sign up</button>
-			</div>
-		)
+                <Row>
+                    <Col size="col-md-6">
+                        <form>
+                            <Input
+                                type="text"
+								name="firstName"
+								value={this.state.firstName}
+								onChange={this.handleChange}
+                                placeholder="First Name"
+                            />
+                            <Input
+                                type="text"
+								name="lastName"
+								value={this.state.lastName}
+								onChange={this.handleChange}
+								placeholder="Last Name"
+                            />
+                            <Input
+                                type="text"
+								name="username"
+								value={this.state.username}
+								onChange={this.handleChange}
+								placeholder="Username"
+                            />
+                            <Input
+                                type="password"
+								name="password"
+								value={this.state.password}
+								onChange={this.handleChange}
+								placeholder="Password"
+                            />
+							<Input
+                                type="password"
+								name="confirmPassword"
+								value={this.state.confirmPassword}
+								onChange={this.handleChange}
+								placeholder="Confirm Password"
+                            />
+							<Input
+                                type="text"
+								name="street"
+								value={this.state.street}
+								onChange={this.handleChange}
+								placeholder="Street Address"
+                            />
+							<Input
+                                type="text"
+								name="city"
+								value={this.state.city}
+								onChange={this.handleChange}
+								placeholder="City"
+                            />
+							<Input
+                                type="text"
+								name="state"
+								value={this.state.state}
+								onChange={this.handleChange}
+								placeholder="State"
+                            />
+							<Input
+                                type="text"
+								name="zip"
+								value={this.state.zip}
+								onChange={this.handleChange}
+								placeholder="Zip"
+                            />
+							<Input
+                                type="cityDuration"
+								name="cityDuration"
+								value={this.state.cityDuration}
+								onChange={this.handleChange}
+								placeholder="Time lived in city"
+                            />
+							<Input
+                                type="text"
+								name="email"
+								value={this.state.email}
+								onChange={this.handleChange}
+								placeholder="Email Address"
+                            />
+                            <FormBtn>
+                                Submit
+                            </FormBtn>
+                        </form>
+                    </Col>
+                </Row>
+            </Container>
+    	);
 	}
 }
 
