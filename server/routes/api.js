@@ -38,5 +38,14 @@ function newUserHandler(req, res) {
 
 router.route("/user")
     .post(newUserHandler);
-    
+
+function busSearchByCity(req, res) {
+    let city = req.body.city;
+    BusinessController.findByCity(req.city)
+    .then(res.json).catch(res.json);
+}    
+
+router.route('/search')
+    .post(busSearchByCity);
+
 module.exports = router;

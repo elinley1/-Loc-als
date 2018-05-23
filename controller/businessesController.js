@@ -24,26 +24,7 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/populate");
 
 module.exports = {
-    // findByCity: function (req, res) {
-    //     db.Business
-    //     .find(req.params.city)
-    //     .then(dbBusiness => res.json(dbBusiness))
-    //     .catch(err => res.status(422).json(err));
-    // },
-
-    // create: function (req, res) {
-    //     db.Business
-    //     .create(req.body)
-    //     .then(dbBusiness => res.json(dbBusiness))
-    //     .catch(err => res.status(422).json(err));
-    // },
-
-    // update: function (req, res) {
-    //     db.Business
-    //     .create(req.body)
-    //     .then(dbBusiness => res.json(dbBusiness))
-    //     .catch(err => res.status(422).json(err));
-    // }
+   
 
     createBusiness (userId, busName, street, city, state, zip, description) {
         var bAddress = {
@@ -72,5 +53,16 @@ module.exports = {
                                     });
                                 });
         });
+    },
+
+    findByCity (city){
+        return new Promise(function (resolve, reject) {
+            db.Business.find({city: city},
+            function (err, busMatches) {
+                if (err) reject (err);
+                    res.send(busMatches)
+                });
+            });
+        }
     }
-}
+

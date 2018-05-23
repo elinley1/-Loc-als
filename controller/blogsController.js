@@ -81,9 +81,6 @@ module.exports = {
             });
     },
 
-    findBusiness: function (req,res) {
-        db.Blog
-        .findById(req.params.id)
-    }
+  
 
 }
