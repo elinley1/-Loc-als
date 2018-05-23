@@ -5,7 +5,6 @@ mongoose.promise = Promise
 
 // Define userSchema
 const userSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     firstName: { type: String, unique: false },
     lastName: { type: String, unique: false },
     local: {
@@ -25,8 +24,6 @@ const userSchema = new Schema({
         googleId: { type: String, required: false }
     },
 
-
-    businesses: [{type: Schema.Types.ObjectId, ref: "business"}],
     posts: [{type: Schema.Types.ObjectId, ref: "blog"}],
 })
 

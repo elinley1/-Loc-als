@@ -7,7 +7,6 @@ mongoose.promise = Promise
 
 // Define userSchema
 const blogSchema = new Schema({
-	_id: Schema.Types.ObjectId,
 	title: {type: String},
 	body: {type: String, required: true},
 	rating: {type: String, required: true},

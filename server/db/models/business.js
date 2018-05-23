@@ -7,20 +7,15 @@ mongoose.promise = Promise
 
 // Define userSchema
 const businessSchema = new Schema({
-	_id: Schema.Types.ObjectId,
-	busName: { type: String, required: true},
-	address: {
-		street: {type: String, required: false},
-		city: {type: String, require: false},
-		state: {type: String, required: true},
-		zip: {type: String, required: true}
-	},
-	
-	description: {type: String, required: false},
-	
-	user: {type: Schema.Types.ObjectId, ref: "user"},
-	posts: [{type: Schema.Types.ObjectId, ref: "blog"}],
-
+    busName: { type: String, required: true},
+    address: {
+        street: {type: String, required: false},
+        city: {type: String, required: true},
+        state: {type: String, required: true},
+        zip: {type: String, required: true}
+    },
+    description: {type: String, required: false},
+    user: {type: Schema.Types.ObjectId, ref: "user"}
 });
 
 // Create reference to User & export
