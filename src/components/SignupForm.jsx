@@ -24,8 +24,17 @@ class SignupForm extends Component {
 		// TODO - validate!
 		axios
 			.post('/auth/signup', {
+				firstName: this.state.firstName,
+				lastName: this.state.lastName,
 				username: this.state.username,
-				password: this.state.password
+				password: this.state.password,
+				street: this.state.street,
+				city: this.state.city,
+				state: this.state.state,
+				zip: this.state.zip,
+				cityDuration: this.state.cityDuration,
+				email: this.state.email
+
 			})
 			.then(response => {
 				console.log(response)
@@ -46,6 +55,20 @@ class SignupForm extends Component {
 		return (
 			<div className="SignupForm">
 				<h1>Signup form</h1>
+				<label htmlFor="firstName">First Name: </label>
+				<input
+					type="text"
+					name="firstName"
+					value={this.state.firstName}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="lastName">Last Name: </label>
+				<input
+					type="text"
+					name="lastName"
+					value={this.state.lastName}
+					onChange={this.handleChange}
+				/>
 				<label htmlFor="username">Username: </label>
 				<input
 					type="text"
@@ -65,6 +88,48 @@ class SignupForm extends Component {
 					type="password"
 					name="confirmPassword"
 					value={this.state.confirmPassword}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="street">Street Address: </label>
+				<input
+					type="text"
+					name="street"
+					value={this.state.street}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="city">City: </label>
+				<input
+					type="text"
+					name="city"
+					value={this.state.city}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="state">State: </label>
+				<input
+					type="text"
+					name="state"
+					value={this.state.state}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="zip">Zip: </label>
+				<input
+					type="text"
+					name="zip"
+					value={this.state.zip}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="cityDuration">City Duration: </label>
+				<input
+					type="cityDuration"
+					name="cityDuration"
+					value={this.state.cityDuration}
+					onChange={this.handleChange}
+				/>
+				<label htmlFor="email">Email: </label>
+				<input
+					type="text"
+					name="email"
+					value={this.state.email}
 					onChange={this.handleChange}
 				/>
 				<button onClick={this.handleSubmit}>Sign up</button>
