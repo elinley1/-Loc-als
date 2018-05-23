@@ -26,30 +26,52 @@ mongoose.connect("mongodb://localhost/populate");
 module.exports = {
     findByUser: function (req, res) {
         db.User
-        .findOne(req.params.username)
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+            .findOne(req.params.username)
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
     },
 
     sortByLongest: function (req, res) {
         db.User
-        .find({})
-        .sort([['cityDuration', -1]])
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+            .find({})
+            .sort([['cityDuration', -1]])
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
     },
 
     create: function (req, res) {
         db.User
-        .create(req.body)
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+            .create(req.body)
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
     },
 
     update: function (req, res) {
         db.User
-        .findOneAndUpdate({'username': req.body.username}, req.body)
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+            .findOneAndUpdate({'username': req.body.username}, req.body)
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
     },
+    // DB business logic level
+    createUser(username, cleartextPassword) {
+        return new Promise(function(resolve, reject) {
+            db.User.findOne(
+                {'local.username': username},
+                function(err, userMatch) {
+                    if(err) reject(err);
+                    if(userMatch) reject({error: `Sorry, already a user with the username: ${username}`});
+                    let newUser = new db.User({
+                        _id: new mongoose.Types.ObjectId(),
+                        'local.username': username.toLowerCase(),
+                        'local.password': cleartextPassword
+                    });
+                    newUser.save(function(err, savedUser) {
+                        if(err) reject(err);
+                        resolve(savedUser);
+                    });
+
+                });
+        });
+
+    }
 }
