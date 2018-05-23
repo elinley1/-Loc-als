@@ -101,4 +101,10 @@ describe('Models', () => {
             }).catch(done);
     });
 });
+
+    describe('findByCity', function () {
+        it('should find businesses with a city equal to the search city', function (done) {
+            BusinessController.findByCity()
+        })
+    })
 })

@@ -76,7 +76,7 @@ module.exports = {
         return new Promise(function(resolve, reject) {
             db.User.findByIdAndUpdate({_id: userID}, {$set: {firstName, lastName, cityDuration, email}}, {new: true}, {function (err, User) {
                 if (err) reject (err);
-                res.send(User);
+                resolve(User);
             }});
 
         })
