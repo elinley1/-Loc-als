@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 // import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_disabled_web.png'
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
+import { Col, Row, Container } from "../../components/Grid";
+import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class LoginForm extends Component {
 	constructor() {
@@ -36,30 +38,34 @@ class LoginForm extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		} else {
 			return (
-				<div className="LoginForm">
-					<h1>Login form</h1>
-					<form>
-						<label htmlFor="username">Username: </label>
-						<input
-							type="text"
-							name="username"
-							value={this.state.username}
-							onChange={this.handleChange}
-						/>
-						<label htmlFor="password">Password: </label>
-						<input
-							type="password"
-							name="password"
-							value={this.state.password}
-							onChange={this.handleChange}
-						/>
-						<button onClick={this.handleSubmit}>Login</button>
-					</form>
+				<Container>
+				<h1>Login form</h1>
+                <Row>
+                    <Col size="col-md-6">
+                        <form>
+                            <Input
+                                type="text"
+								name="username"
+								value={this.state.username}
+								onChange={this.handleChange}
+                                placeholder="Username"
+                            />
+							<Input
+                                type="password"
+								name="password"
+								value={this.state.password}
+								onChange={this.handleChange}
+                                placeholder="Password"
+                            />
+							<button onClick={this.handleSubmit}>Login</button>
+						</form>
 					<a href="/auth/google">
 						{/* <GoogleButton /> */}
 						<img src={googleButton} alt="sign into Google Button" />
 					</a>
-				</div>
+					</Col>
+				</Row>
+				</Container>
 			)
 		}
 	}
