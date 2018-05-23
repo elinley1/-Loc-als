@@ -15,8 +15,7 @@ const businessSchema = new Schema({
 		state: {type: String, required: true},
 		zip: {type: String, required: true}
 	},
-	email: {type: String, required: true},
-
+	
 	description: {type: String, required: false},
 	
 	user: {type: Schema.Types.ObjectId, ref: "user"},

@@ -24,27 +24,7 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/populate");
 
 module.exports = {
-    findByUser: function (req, res) {
-        db.User
-            .findOne(req.params.username)
-            .then(dbUser => res.json(dbUser))
-            .catch(err => res.status(422).json(err));
-    },
-
-    sortByLongest: function (req, res) {
-        db.User
-            .find({})
-            .sort([['cityDuration', -1]])
-            .then(dbUser => res.json(dbUser))
-            .catch(err => res.status(422).json(err));
-    },
-
-    create: function (req, res) {
-        db.User
-            .create(req.body)
-            .then(dbUser => res.json(dbUser))
-            .catch(err => res.status(422).json(err));
-    },
+ 
 
     update: function (req, res) {
         db.User
@@ -73,5 +53,27 @@ module.exports = {
                 });
         });
 
+       
+    },
+    assocBusiness(userId, businessId) {
+        // Find a user into that user.businesses push businessId 
+        //For that business set business.user to userId
+        //return a promise that does the a  bove and then resolves or rejects 
+        return new Promise(function(resolve, reject) {
+            db.User.findOneAndUpdate({_id: userId},
+                { $push: { businesses: businessId }},
+                function(err) {
+                    if(err) reject(err);
+                    db.User.findById(userId, function(err, u) {
+                        if(err) reject(err);
+                        db.Business.findOneAndUpdate({_id: businessId}, {user: userId},
+                        function(err) {
+                            if(err) reject(err);
+                            resolve(u);
+                        });
+                    });
+                }
+             );
+        })
     }
 }

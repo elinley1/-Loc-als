@@ -61,12 +61,36 @@ describe('Models', () => {
                 }).catch(done);
         });
     });
-});
+    
+    describe("AssocBusiness", function () {
+        it('should associate a business and user', function (done) {
+            UserController.createUser("Janedoe", "password")
+                .then(function(savedUser) {
+                    let userId = savedUser._id;
+                    let bizId = new mongoose.Types.ObjectId();
+                    let testBiz = new Business({
+                        _id: bizId,
+                        busName: "Acme, Inc.",
+                        address: {zip: 30317, state: "GA"},
+                    });
+                    
+                    return testBiz.save().then(function() {
+                        let assocPromise = UserController.assocBusiness(userId, bizId);
+                        assocPromise    
+                            .then(function(u) {
+                                    assert.notEqual(-1, u.businesses.indexOf(bizId));
+                                    Business.findById(bizId, function(err, b) {
+                                        if(err) done(err);
+                                        assert.equal(b.user, userId.toString());
+                                        done();
+                                    })
+                                });
+                    });
+                }).catch(done);
 
-describe('Array', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when the value is not present', function() {
-            assert.equal([1,2,3].indexOf(4), -1);
-        });
+        })
     });
 });
+
+
+
