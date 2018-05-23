@@ -3,6 +3,8 @@ const router = express.Router()
 const User = require('../db/models/user')
 const passport = require('../passport')
 
+const UserController = require('../../controller/usersController');
+
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 router.get(
     '/google/callback',
@@ -56,22 +58,14 @@ router.post('/logout', (req, res) => {
 router.post('/signup', (req, res) => {
     const { username, password } = req.body
     // ADD VALIDATION
-    User.findOne({ 'local.username': username }, (err, userMatch) => {
-        if (userMatch) {
-            return res.json({
-                error: `Sorry, already a user with the username: ${username}`
-            })
-        }
-        const newUser = new User({
-            'local.username': username,
-            'local.password': password
+    UserController.createUser(username, password)
+        .then(function(user) {
+            user.local.password = "xxxxxxxxxxxxx";
+            res.json(user);
         })
-        newUser.save((err, savedUser) => {
-            if (err) return res.json(err)
-            return res.json(savedUser)
-	})
-    })
-
-})
+        .catch(function(err) {
+            res.json(err);
+        });
+});
 
 module.exports = router
