@@ -25,10 +25,11 @@
 		"react-router-dom": "^4.1.2"
 	},
 	"devDependencies": {
+		"chai": "^4.1.2",
 		"concurrently": "^3.5.0",
-	    "react-scripts": "1.0.7",
-	    "mocha": "^5.2.0",
-		"chai": "^4.1.2"
+		"mocha": "^5.2.0",
+		"chai-http": "^4.0.0",
+		"react-scripts": "1.0.7"
 	},
 	"scripts": {
 		"start": "export NODE_ENV=\"production\" && node server/server.js",
@@ -36,8 +37,8 @@
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
 		"dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
-	    "prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
-            "serverTest": "mocha"
+		"prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
+	    "serverTest": "mocha --timeout 10000"
 	},
 	"proxy": "http://localhost:8080"
 }

@@ -81,4 +81,6 @@ app.use(function(err, req, res, next) {
 // ==== Starting Server =====
 app.listen(PORT, () => {
 	console.log(`App listening on PORT: ${PORT}`)
-})
+});
+
+module.exports = app;

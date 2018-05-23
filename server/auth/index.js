@@ -71,6 +71,7 @@ router.post('/signup', (req, res) => {
 			return res.json(savedUser)
 		})
 	})
+
 })
 
 module.exports = router
