@@ -7,65 +7,51 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
-class profile extends Component {
-    state = {
-        blogs: [],
-        busName: "",
-        address: "",
-        email: "",
-        username: "",
-        description: ""
-    };
 
+
+class FormExample extends React.Component {
+    constructor(props, context) {
+      super(props, context);
+  
+      this.handleChange = this.handleChange.bind(this);
+  
+      this.state = {
+        value: ''
+      };
+    }
+  
+    getValidationState() {
+      const length = this.state.value.length;
+      if (length > 10) return 'success';
+      else if (length > 5) return 'warning';
+      else if (length > 0) return 'error';
+      return null;
+    }
+  
+    handleChange(e) {
+      this.setState({ value: e.target.value });
+    }
+  
     render() {
-        return (
-            <Container fluid>
-                <Row>
-                    <Col size="md-6">
-                        <Jumbotron>
-                            <h1>{this.business}</h1>
-                        </Jumbotron>
-                        <div>
-                            <panel.heading>Address</panel.heading>
-                            <panel.body>{this.state.address}</panel.body>
-                            <panel.heading>Email</panel.heading>
-                            <panel.body>{this.state.email}</panel.body>
-                            <panel.heading>Username of "Owner"</panel.heading>
-                            <panel.body>{this.state.username}</panel.body>
-                            <panel.heading>Description</panel.heading>
-                            <panel.body>{this.state.description}</panel.body>
-                        </div>
-
-                    </Col>
-                    <Col size="md-6 sm-12">
-                        <Jumbotron>
-                            <h1>Blogs about this Business</h1>
-                        </Jumbotron>
-                        {this.state.blogs.length ? (
-                            <ListGroupItem>
-                                {this.state.blogs.map(blog => (
-                                    <ListGroupItem key={blog._id} href={"/blogs/" + blogId}>
-
-                                        <strong>
-                                            {blog.title} by {blog.username}
-                                        </strong>
-                                        <div>
-                                            {blog.body}
-                    </ListGroupItem>
-
-
-          </Col>
-        </Row>
-      </Container>
-                        );
-                        }
-                      }
-
-                      <Grid>
-  <Row>
-    <Col xs={6} md={4}>
-      <Image src="/thumbnail.png" rounded />
-    </Col>
-    </Grid>
-                      
-export default profile;
+      return (
+        <form>
+          <FormGroup
+            controlId="formBasicText"
+            validationState={this.getValidationState()}
+          >
+            <ControlLabel>Working example with validation</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.value}
+              placeholder="Enter text"
+              onChange={this.handleChange}
+            />
+            <FormControl.Feedback />
+            <HelpBlock>Validation is based on string length.</HelpBlock>
+          </FormGroup>
+        </form>
+      );
+    }
+  }
+  
+  render(<FormExample />);
