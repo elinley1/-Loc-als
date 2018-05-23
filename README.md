@@ -41,6 +41,8 @@ To Remove a user: do a `DELETE` on route `/api/v1/User/:userId`
 To Remove a business: do a `DELETE` on route `/api/v1/Business/:businessId`
 To Remove a (blog) post: do a `DELETE` on route `/api/v1/Blog/:blogId`
 
+To Get a current user: do a `GET` on route `/auth/user`
+
 To search for a business with the search input city: do a `GET` with route `api/v1/Business?query={"city":{"$regex":"^(Atl)"}}`
     **In this search the example, "Atl" as the search city parameter was used. 
 
@@ -63,8 +65,48 @@ Example of how to get a business associated with a user:
 
 Example get user's businesses:
 `GET 'http://localhost:8080/api/v1/Business?query={"user": "5b04d016d6b44e148558c334"}' `
-The idea is that you query for businesses that have a matching user field
+The idea is that you query for businesses that have a matching user field.
 
+##Result Arrays
+
+Should be returned as follows:
+USER
+```
+firstName: { },
+    lastName: { },
+    local: {
+        username: { },
+        password: { }
+    },
+    address: {
+        street: { },
+        city: { },
+        state: { },
+        zip: { }
+    },
+    cityDuration: { },
+    email: { }
+    ```
+    BUSINESS
+    ```
+    busName: { },
+    address: {
+        street: { },
+        city: { },
+        state: { },
+        zip: { }
+    },
+    description: { },
+    user: {userId}
+    ```
+    BLOG
+    ```
+    title: { },
+	body: { },
+	rating: { },
+	author: {userId},
+	business: {businessId}
+    ```
 ## Note
 * In order to set the google authentication up, you must register your app @ [https://console.developers.google.com](https://console.developers.google.com) & set `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` as environmental variables
 * In development mode (i.e. `npm run dev`), OAuth google callback is not being proxied to the google servers. Therefore in order to test the google OAuth on your local machine do the following:
