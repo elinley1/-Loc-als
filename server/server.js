@@ -75,7 +75,6 @@ if (process.env.NODE_ENV === 'production') {
 
 /* Express app ROUTING */
 app.use('/auth', require('./routes/auth'))
-app.use('/api', require('./routes/api'))
 restify.serve(router, db.User);
 restify.serve(router, db.Business);
 restify.serve(router, db.Blog);

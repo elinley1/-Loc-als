@@ -47,38 +47,6 @@ module.exports = {
                     });
 
                 });
-        });   
-    },
-
-    assocBusiness(userId, businessId) {
-        // Find a user into that user.businesses push businessId 
-        //For that business set business.user to userId
-        //return a promise that does the a  bove and then resolves or rejects 
-        return new Promise(function(resolve, reject) {
-            db.User.findOneAndUpdate({_id: userId},
-                { $push: { businesses: businessId }},
-                function(err) {
-                    if(err) reject(err);
-                    db.User.findById(userId, function(err, u) {
-                        if(err) reject(err);
-                        db.Business.findOneAndUpdate({_id: businessId}, {user: userId},
-                        function(err) {
-                            if(err) reject(err);
-                            resolve(u);
-                        });
-                    });
-                }
-             );
-        })
-    },
-
-    updateUser(user, userId) {
-        return new Promise(function(resolve, reject) {
-            db.User.findByIdAndUpdate({_id: userID}, {$set: {firstName, lastName, cityDuration, email}}, {new: true}, {function (err, User) {
-                if (err) reject (err);
-                resolve(User);
-            }});
-
-        })
+        });
     }
 }
