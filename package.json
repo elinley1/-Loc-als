@@ -11,8 +11,10 @@
 		"dotenv": "^4.0.0",
 		"express": "^4.15.3",
 		"express-session": "^1.15.4",
+		"global": "^4.3.2",
 		"mongoose": "^4.11.4",
 		"morgan": "^1.8.2",
+		"nodemon": "^1.17.4",
 		"passport": "^0.3.2",
 		"passport-google-oauth": "^1.0.0",
 		"passport-google-oauth20": "^1.0.0",
@@ -24,7 +26,9 @@
 	},
 	"devDependencies": {
 		"concurrently": "^3.5.0",
-		"react-scripts": "1.0.7"
+	    "react-scripts": "1.0.7",
+	    "mocha": "^5.2.0",
+		"chai": "^4.1.2"
 	},
 	"scripts": {
 		"start": "export NODE_ENV=\"production\" && node server/server.js",
@@ -32,7 +36,8 @@
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
 		"dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
-		"prod": "export NODE_ENV=\"production\" && nodemon server/server.js"
+	    "prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
+            "serverTest": "mocha"
 	},
 	"proxy": "http://localhost:8080"
 }
