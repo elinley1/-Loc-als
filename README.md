@@ -25,6 +25,45 @@ Passportjs
 |        |-- blog.js                // Schema for the Blog collection
 | -- src/                           // Entry for the React client side application
 ```
+## Routes
+
+A RESTful CRUD api was developed using Express-Restify-Mongoose @ (https://florianholzapfel.github.io/express-restify-mongoose/). 
+
+To Create a user: do a `PUT` on route `/api/v1/User`
+To Create a business: do a `PUT` on route `/api/v1/Business/:userId`
+To Create a (blog) post: do a `PUT` on route `/api/v1/Blog/:businessId`
+
+To Update a user: do a `PUT` on route `/api/v1/User/:user`
+To Update a business: do a `PUT` on route `/api/v1/Business/:businessId`
+To Update a (blog) post: do a `PUT` on route `/api/v1/Blog/:blogId`
+
+To Remove a user: do a `DELETE` on route `/api/v1/User/:userId`
+To Remove a business: do a `DELETE` on route `/api/v1/Business/:businessId`
+To Remove a (blog) post: do a `DELETE` on route `/api/v1/Blog/:blogId`
+
+To search for a business with the search input city: do a `GET` with route `api/v1/Business?query={"city":{"$regex":"^(Atl)"}}`
+    **In this search the example, "Atl" as the search city parameter was used. 
+
+For relationships the following should be set:
+
+business.user (user is the user_Id)
+
+blog.author
+blog.business
+
+Example of how to get a business associated with a user: 
+```
+    POST http://localhost:8080/api/v1/Business
+        req.body (from client):
+        '{"busName": "Acme, Inc.",
+          "address": {"city": "Atlanta", "state": "GA", "zip": "30317"},
+          // Associate the new business with the user w/ user._id = 5b04d016d6b44e148558c334
+          "user": "5b04d016d6b44e148558c334" } `
+```
+
+Example get user's businesses:
+`GET 'http://localhost:8080/api/v1/Business?query={"user": "5b04d016d6b44e148558c334"}' `
+The idea is that you query for businesses that have a matching user field
 
 ## Note
 * In order to set the google authentication up, you must register your app @ [https://console.developers.google.com](https://console.developers.google.com) & set `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` as environmental variables

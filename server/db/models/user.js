@@ -22,9 +22,7 @@ const userSchema = new Schema({
 
     google: {
         googleId: { type: String, required: false }
-    },
-
-    posts: [{type: Schema.Types.ObjectId, ref: "blog"}],
+    }
 })
 
 // Define schema methods
