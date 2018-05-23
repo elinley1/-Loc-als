@@ -10,6 +10,7 @@
 		"connect-mongo": "^1.3.2",
 		"dotenv": "^4.0.0",
 		"express": "^4.15.3",
+		"express-restify-mongoose": "^4.3.0",
 		"express-session": "^1.15.4",
 		"global": "^4.3.2",
 		"mongoose": "^4.11.4",
@@ -26,9 +27,9 @@
 	},
 	"devDependencies": {
 		"chai": "^4.1.2",
+		"chai-http": "^4.0.0",
 		"concurrently": "^3.5.0",
 		"mocha": "^5.2.0",
-		"chai-http": "^4.0.0",
 		"react-scripts": "1.0.7"
 	},
 	"scripts": {
@@ -38,7 +39,7 @@
 		"eject": "react-scripts eject",
 		"dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
 		"prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
-	    "serverTest": "mocha --timeout 10000"
+		"serverTest": "mocha --timeout 10000"
 	},
 	"proxy": "http://localhost:8080"
 }
