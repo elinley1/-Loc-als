@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
-import {FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button} from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Col, Row, Container } from "../components/Grid";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 
 class SignupForm extends Component {
 	constructor() {
 		super()
 		this.state = {
+			firstName: '',
+			lastName: '',
 			username: '',
 			password: '',
 			confirmPassword: '',
+			address: {
+				street: '', 
+				city: '',
+				state:'',
+				zip: ''
+			},
+			cityDuration: '',
+			email: '',
 			redirectTo: null
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,10 +40,10 @@ class SignupForm extends Component {
 				lastName: this.state.lastName,
 				username: this.state.username,
 				password: this.state.password,
-				street: this.state.street,
-				city: this.state.city,
-				state: this.state.state,
-				zip: this.state.zip,
+				street: this.state.address.street,
+				city: this.state.address.city,
+				state: this.state.address.state,
+				zip: this.state.address.zip,
 				cityDuration: this.state.cityDuration,
 				email: this.state.email
 
@@ -99,28 +108,28 @@ class SignupForm extends Component {
 							<Input
                                 type="text"
 								name="street"
-								value={this.state.street}
+								value={this.state.address.street}
 								onChange={this.handleChange}
 								placeholder="Street Address"
                             />
 							<Input
                                 type="text"
 								name="city"
-								value={this.state.city}
+								value={this.state.address.city}
 								onChange={this.handleChange}
 								placeholder="City"
                             />
 							<Input
                                 type="text"
 								name="state"
-								value={this.state.state}
+								value={this.state.address.state}
 								onChange={this.handleChange}
 								placeholder="State"
                             />
 							<Input
                                 type="text"
 								name="zip"
-								value={this.state.zip}
+								value={this.state.address.zip}
 								onChange={this.handleChange}
 								placeholder="Zip"
                             />

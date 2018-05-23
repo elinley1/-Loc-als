@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 // import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_disabled_web.png'
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 import { Col, Row, Container } from "../../components/Grid";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input, FormBtn } from "../../components/Form";
 
 class LoginForm extends Component {
 	constructor() {
@@ -57,7 +57,9 @@ class LoginForm extends Component {
 								onChange={this.handleChange}
                                 placeholder="Password"
                             />
-							<button onClick={this.handleSubmit}>Login</button>
+							<FormBtn>
+                                Submit
+                            </FormBtn>
 						</form>
 					<a href="/auth/google">
 						{/* <GoogleButton /> */}
