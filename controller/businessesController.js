@@ -24,24 +24,53 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/populate");
 
 module.exports = {
-    findByCity: function (req, res) {
-        db.Business
-        .find(req.params.city)
-        .then(dbBusiness => res.json(dbBusiness))
-        .catch(err => res.status(422).json(err));
-    },
+    // findByCity: function (req, res) {
+    //     db.Business
+    //     .find(req.params.city)
+    //     .then(dbBusiness => res.json(dbBusiness))
+    //     .catch(err => res.status(422).json(err));
+    // },
 
-    create: function (req, res) {
-        db.Business
-        .create(req.body)
-        .then(dbBusiness => res.json(dbBusiness))
-        .catch(err => res.status(422).json(err));
-    },
+    // create: function (req, res) {
+    //     db.Business
+    //     .create(req.body)
+    //     .then(dbBusiness => res.json(dbBusiness))
+    //     .catch(err => res.status(422).json(err));
+    // },
 
-    update: function (req, res) {
-        db.Business
-        .create(req.body)
-        .then(dbBusiness => res.json(dbBusiness))
-        .catch(err => res.status(422).json(err));
+    // update: function (req, res) {
+    //     db.Business
+    //     .create(req.body)
+    //     .then(dbBusiness => res.json(dbBusiness))
+    //     .catch(err => res.status(422).json(err));
+    // }
+
+    createBusiness (userId, busName, street, city, state, zip, description) {
+        var bAddress = {
+            street: street,
+            city: city,
+            state: state,
+            zip: zip
+        };
+        let newBusiness = new db.Business({
+            _id: new mongoose.Types.ObjectId(),
+            user: userId,
+            busName: busName,
+            address: bAddress,
+            description: description,
+            posts: []
+        });
+
+        return new Promise(function(resolve, reject){
+            db.Business.findOne({busName: busName},
+                                function(err, busMatch) {
+                                    if (err) reject(err);
+                                    if(busMatch) reject({error: 'This business has already been created.'});
+                                    newBusiness.save(function(err, savedBusiness) {
+                                        if(err) reject(err);
+                                        resolve(savedBusiness);
+                                    });
+                                });
+        });
     }
 }

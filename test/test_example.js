@@ -12,6 +12,7 @@ let User = require('../server/db/models/user');
 let Blog = require('../server/db/models/blog');
 let Business = require('../server/db/models/business');
 let UserController = require('../controller/usersController');
+let BusinessController = require('../controller/businessesController');
 
 describe('Models', () => {
     beforeEach((done) => {
@@ -61,7 +62,7 @@ describe('Models', () => {
                 }).catch(done);
         });
     });
-    
+
     describe("AssocBusiness", function () {
         it('should associate a business and user', function (done) {
             UserController.createUser("Janedoe", "password")
@@ -73,10 +74,10 @@ describe('Models', () => {
                         busName: "Acme, Inc.",
                         address: {zip: 30317, state: "GA"},
                     });
-                    
+
                     return testBiz.save().then(function() {
                         let assocPromise = UserController.assocBusiness(userId, bizId);
-                        assocPromise    
+                        assocPromise
                             .then(function(u) {
                                     assert.notEqual(-1, u.businesses.indexOf(bizId));
                                     Business.findById(bizId, function(err, b) {
@@ -90,7 +91,14 @@ describe('Models', () => {
 
         })
     });
+    describe('CreateBusiness', function (){
+        it('should create a new business if it does not already exist', function(done) {
+            BusinessController.createBusiness(new mongoose.Types.ObjectId(), 'ABusiness','100 Street Rd.', 'Atlanta', 'GA', '30303', 'This is a test business' )
+            .then(function(savedBusiness) {
+
+                assert.equal("ABusiness", savedBusiness.busName);
+                done();
+            }).catch(done);
+    });
 });
-
-
-
+})
