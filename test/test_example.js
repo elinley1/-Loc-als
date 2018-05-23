@@ -90,7 +90,14 @@ describe('Models', () => {
 
         })
     });
+    describe('CreateBusiness', function (){
+        it('should create a new business if it does not already exist', function(done) {
+            BusinessController.createBusiness('ABusiness','100 Street Rd.', 'Atlanta', 'GA', '30303', 'This is a test business' )
+            .then(function(savedBusiness) {
+                
+                assert.equal("ABusiness", savedBusiness.busName);
+                done();
+            }).catch(done);
+    });
 });
-
-
-
+})
