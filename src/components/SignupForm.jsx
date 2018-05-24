@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
+import { Input } from "../components/Form";
 
 class SignupForm extends Component {
 	constructor() {
@@ -147,9 +147,7 @@ class SignupForm extends Component {
 								onChange={this.handleChange}
 								placeholder="Email Address"
                             />
-                            <FormBtn>
-                                Submit
-                            </FormBtn>
+                            <button onClick={this.handleSubmit}>Sign up</button>
                         </form>
                     </Col>
                 </Row>
