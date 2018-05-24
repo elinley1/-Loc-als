@@ -76,6 +76,7 @@ class App extends Component {
 					loggedIn: true,
 					user: response.data.user
 				})
+				window.sessionStorage.setItem( "userId", response.data.user._id );
 			} else {
 				this.setState({
 					loggedIn: false,

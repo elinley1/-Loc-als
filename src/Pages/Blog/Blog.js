@@ -26,10 +26,12 @@ class Blog extends Component {
     
     handleSubmit = event => {
         event.preventDefault();
+        const userId = window.sessionStorage.getItem("userId");
         axios.post('/api/v1/Blog', {
 			title: this.state.title,
 			body: this.state.body,
-			rating: this.state.rating
+            rating: this.state.rating,
+            author: userId
 		}).then(response => {
             console.log(response)
             if (!response.data.errmsg) {
@@ -71,7 +73,7 @@ class Blog extends Component {
                             <TextArea
                                 value={this.state.body}
                                 onChange={this.handleChange}
-                                name="Body"
+                                name="body"
                                 placeholder="Post Review"
                             />
                             <FormBtn
