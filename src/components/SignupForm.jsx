@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Col, Row, Grid } from "react-bootstrap";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import './SignupForm.css'
 
 class SignupForm extends Component {
 	constructor() {
@@ -58,9 +59,9 @@ class SignupForm extends Component {
 		}
 		return (
 			<Grid>
-				<h1>Signup form</h1>
+				<h1>Signup</h1>
                 <Row>
-                    <Col size="col-md-12">
+                    <Col size="col-md-6 col-md-offset-3">
                         <form>
                             <Input
                                 type="text"
@@ -139,7 +140,7 @@ class SignupForm extends Component {
 								onChange={this.handleChange}
 								placeholder="Email Address"
                             />
-                            <Button onClick={this.handleSubmit}>Submit</Button>
+                            <FormBtn onClick={this.handleSubmit}>Submit</FormBtn>
                         </form>
                     </Col>
                 </Row>
