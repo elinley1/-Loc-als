@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import {FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button} from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row, Grid } from "react-bootstrap";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import './SignupForm.css'
 
 class SignupForm extends Component {
 	constructor() {
@@ -24,21 +25,22 @@ class SignupForm extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-		// TODO - add validation
-		axios
-			.post('/auth/signup', {
-				firstName: this.state.firstName,
-				lastName: this.state.lastName,
+		axios.post('/api/v1/User', {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			local: {
 				username: this.state.username,
 				password: this.state.password,
+			},
+			address: {
 				street: this.state.street,
 				city: this.state.city,
 				state: this.state.state,
 				zip: this.state.zip,
-				cityDuration: this.state.cityDuration,
-				email: this.state.email
-
-			})
+			},
+			cityDuration: this.state.cityDuration,
+			email: this.state.email
+		})
 			.then(response => {
 				console.log(response)
 				if (!response.data.errmsg) {
@@ -56,10 +58,10 @@ class SignupForm extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		}
 		return (
-			<Container>
-				<h1>Signup form</h1>
+			<Grid>
+				<h1>Signup</h1>
                 <Row>
-                    <Col size="col-md-6">
+                    <Col size="col-md-6 col-md-offset-3">
                         <form>
                             <Input
                                 type="text"
@@ -138,13 +140,11 @@ class SignupForm extends Component {
 								onChange={this.handleChange}
 								placeholder="Email Address"
                             />
-                            <FormBtn>
-                                Submit
-                            </FormBtn>
+                            <FormBtn onClick={this.handleSubmit}>Submit</FormBtn>
                         </form>
                     </Col>
                 </Row>
-            </Container>
+            </Grid>
     	);
 	}
 }

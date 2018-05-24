@@ -24,14 +24,6 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/populate");
 
 module.exports = {
- 
-
-    update: function (req, res) {
-        db.User
-            .findOneAndUpdate({'username': req.body.username}, req.body)
-            .then(dbUser => res.json(dbUser))
-            .catch(err => res.status(422).json(err));
-    },
     // DB business logic level
     createUser(username, cleartextPassword) {
         return new Promise(function(resolve, reject) {
@@ -43,7 +35,11 @@ module.exports = {
                     let newUser = new db.User({
                         _id: new mongoose.Types.ObjectId(),
                         'local.username': username.toLowerCase(),
-                        'local.password': cleartextPassword
+                        'local.password': cleartextPassword,
+                        firstName: firstName,
+                        lastName: lastName,
+                        cityDuration: cityDuration,
+                        email: email,
                     });
                     newUser.save(function(err, savedUser) {
                         if(err) reject(err);
@@ -52,28 +48,5 @@ module.exports = {
 
                 });
         });
-
-       
-    },
-    assocBusiness(userId, businessId) {
-        // Find a user into that user.businesses push businessId 
-        //For that business set business.user to userId
-        //return a promise that does the a  bove and then resolves or rejects 
-        return new Promise(function(resolve, reject) {
-            db.User.findOneAndUpdate({_id: userId},
-                { $push: { businesses: businessId }},
-                function(err) {
-                    if(err) reject(err);
-                    db.User.findById(userId, function(err, u) {
-                        if(err) reject(err);
-                        db.Business.findOneAndUpdate({_id: businessId}, {user: userId},
-                        function(err) {
-                            if(err) reject(err);
-                            resolve(u);
-                        });
-                    });
-                }
-             );
-        })
     }
 }

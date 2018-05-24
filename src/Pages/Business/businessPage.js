@@ -47,8 +47,7 @@ class BusinessPage extends Component {
                 <panel.heading>Description</panel.heading>
                 <panel.body>{this.state.description}</panel.body>
             </div>                
-         
-          </Col>
+            </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Blogs about this Business</h1>
@@ -63,9 +62,8 @@ class BusinessPage extends Component {
                       </strong>
                       <div>
                           {blog.body}
+                      </div>    
                     </ListGroupItem>
-
-
           </Col>
         </Row>
       </Container>
