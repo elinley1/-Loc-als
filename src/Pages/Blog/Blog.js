@@ -56,7 +56,7 @@ class Blog extends Component {
                     <Col size="md-6">
                         <h2>Rate and Review {this.state.busName}</h2>
                         <form>
-                            <Select value={this.state.rating} name="rating" size="1" onChange={this.handleChange} >
+                            <Select value={this.state.rating} name="rating" size="1" onChange={this.handleChange} type = "int"  >
                                 <option selected>Rating</option>
                                 <option value="1">1 star</option>
                                 <option value="2">2 stars</option>
