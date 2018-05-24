@@ -29,7 +29,7 @@ class BusinessPage extends Component {
       .catch(err => console.log(err));
   };
 
-   render() {
+  render() {
     return (
       <Container fluid>
         <Row>
@@ -38,16 +38,16 @@ class BusinessPage extends Component {
               <h1>{this.business}</h1>
             </Jumbotron>
             <div>
-                <panel.heading>Address</panel.heading>
-                <panel.body>{this.state.address}</panel.body>
-                <panel.heading>Email</panel.heading>
-                <panel.body>{this.state.email}</panel.body>
-                <panel.heading>Username of "Owner"</panel.heading>
-                <panel.body>{this.state.username}</panel.body>
-                <panel.heading>Description</panel.heading>
-                <panel.body>{this.state.description}</panel.body>
-            </div>                
-            </Col>
+              <panel.heading>Address</panel.heading>
+              <panel.body>{this.state.address}</panel.body>
+              <panel.heading>Email</panel.heading>
+              <panel.body>{this.state.email}</panel.body>
+              <panel.heading>Username of "Owner"</panel.heading>
+              <panel.body>{this.state.username}</panel.body>
+              <panel.heading>Description</panel.heading>
+              <panel.body>{this.state.description}</panel.body>
+            </div>
+          </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Blogs about this Business</h1>
@@ -56,19 +56,18 @@ class BusinessPage extends Component {
               <ListGroupItem>
                 {this.state.blogs.map(blog => (
                   <ListGroupItem key={blog._id} href={"/blogs/" + blogId}>
-                    
-                      <strong>
-                        {blog.title} by {blog.username}
-                      </strong>
-                      <div>
-                          {blog.body}
-                      </div>    
-                    </ListGroupItem>
+                    <strong>
+                      {blog.title} by {blog.username}
+                    </strong>
+                    <div>
+                      {blog.body}
+                    </div>
+                  </ListGroupItem>))}
           </Col>
         </Row>
       </Container>
-    );
-  }
-}
-
+          );
+        }
+      }
+      
 export default BusinessPage;

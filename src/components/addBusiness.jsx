@@ -21,19 +21,16 @@ class createBusiness extends Component {
 			[event.target.name]: event.target.value
 		})
 	}
-				
+
 	handleSubmit(event) {
 		event.preventDefault()
 		axios.post('/api/v1/Business/:userId', { //Not sure how to route the userID here, but that's the route you had in the readme
+			name: this.state.busName,
 			address: {
 				street: this.state.street,
 				city: this.state.city,
 				state: this.state.state,
 				zip: this.state.zip,
-			},
-			email: this.state.email,
-			local: {
-				username: this.state.username,
 			},
 			description: this.state.description
 		})
@@ -55,66 +52,66 @@ class createBusiness extends Component {
 		}
 		return (
 			<Grid>
-				<h1>Add Business</h1>
-                <Row>
-                    <Col size="col-md-6 col-md-offset-3">
-                        <form>
-						<Input
-                                type="text"
+				<h1>Add Your Business</h1>
+				<Row>
+					<Col size="col-md-6 col-md-offset-3">
+						<form>
+							<Input
+								type="text"
+								name="name"
+								value={this.state.name}
+								onChange={this.handleChange}
+								placeholder="Your Business Name"
+							/>	
+							<Input
+								type="text"
 								name="street"
 								value={this.state.street}
 								onChange={this.handleChange}
 								placeholder="Street Address"
-                            />
+							/>
 							<Input
-                                type="text"
+								type="text"
 								name="city"
 								value={this.state.city}
 								onChange={this.handleChange}
 								placeholder="City"
-                            />
+							/>
 							<Input
-                                type="text"
+								type="text"
 								name="state"
 								value={this.state.state}
 								onChange={this.handleChange}
 								placeholder="State"
-                            />
+							/>
 							<Input
-                                type="text"
+								type="text"
 								name="zip"
 								value={this.state.zip}
 								onChange={this.handleChange}
 								placeholder="Zip"
-                            />
-                            <Input
-                                type="text"
-								name="username"
-								value={this.state.username}
-								onChange={this.handleChange}
-								placeholder="Username"
-                            />
+							/>
 							<Input
-                                type="text"
+								type="text"
 								name="email"
 								value={this.state.email}
 								onChange={this.handleChange}
-								placeholder="Email Address"
-                            />
+								placeholder="Email Address for Business"
+							/>
 							<TextArea
-                                type="text"
+								type="text"
 								name="description"
 								value={this.state.description}
 								onChange={this.handleChange}
 								placeholder="Description"
-                            />
-                            <FormBtn onClick={this.handleSubmit}>Submit</FormBtn>
-                        </form>
-                    </Col>
-                </Row>
-            </Grid>
-    	);
+							/>
+							<FormBtn onClick={this.handleSubmit}>Submit</FormBtn>
+						</form>
+					</Col>
+				</Row>
+			</Grid>
+		);
 	}
 }
 
-export default SignupForm
+export default createBusiness;
