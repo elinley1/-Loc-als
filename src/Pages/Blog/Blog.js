@@ -1,40 +1,60 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn, Select } from "../../components/Form";
-
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 class Blog extends Component {
-    state = {
-        title: "",
-        body: "",
-        rating: "",
-        images:""
-    };
+    constructor() {
+		super()
+		this.state = {
+			title: '',
+			body: '',
+			rating: '',
+			redirectTo: null
+		}
+		this.handleSubmit = this.handleSubmit.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+	}
+    
+    handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-          [name]: value
-        });
-    };
-
-    componentDidMount() {
-        
-    };
-
-    handleFormSubmit = event => {
+    
+    handleSubmit = event => {
         event.preventDefault();
-        
+        axios.post('/api/v1/Blog', {
+			title: this.state.title,
+			body: this.state.body,
+			rating: this.state.rating
+		}).then(response => {
+            console.log(response)
+            if (!response.data.errmsg) {
+                console.log('blog submited')
+                this.setState({
+                    redirectTo: '/'
+                })
+            } else {
+                console.log("err")
+            }
+        })
     };
     
     render() {
+        if (this.state.redirectTo) {
+			return <Redirect to={{ pathname: this.state.redirectTo }} />
+        }
+        
         return (
             <Container>
                 <Row>
                     <Col size="md-6">
                         <h2>Rate and Review {this.state.busName}</h2>
                         <form>
-                            <Select value={this.state.rating} name="rating" size="1" onChange={this.handleInputChange} >
+                            <Select value={this.state.rating} name="rating" size="1" onChange={this.handleChange} >
                                 <option selected>Rating</option>
                                 <option value="1">1 star</option>
                                 <option value="2">2 stars</option>
@@ -44,27 +64,19 @@ class Blog extends Component {
                             </Select>
                             <Input
                                 value={this.state.title}
-                                onChange={this.handleInputChange}
+                                onChange={this.handleChange}
                                 name="title"
                                 placeholder="Review Title (required)"
                             />
                             <TextArea
                                 value={this.state.body}
-                                onChange={this.handleInputChange}
+                                onChange={this.handleChange}
                                 name="Body"
                                 placeholder="Post Review"
                             />
-                            <Input
-                                value={this.state.image}
-                                onChange={this.handleInputChange}
-                                name="images"
-                                type="file" 
-                                className="btn btn-outline-primary waves-effect" 
-                                accept=".jpg, .jpeg, .png"
-                            />
                             <FormBtn
                                 disabled={!(this.state.rating && this.state.title)} 
-                                onClick={this.handleFormSubmit}>
+                                onClick={this.handleSubmit}>
                                 Submit Blog
                             </FormBtn>
                         </form>
