@@ -4,6 +4,10 @@
 	"private": true,
 	"dependencies": {
 		"axios": "^0.16.2",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-react": "^6.24.1",
 		"bcrypt": "^1.0.2",
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.17.2",
@@ -12,6 +16,7 @@
 		"express": "^4.15.3",
 		"express-session": "^1.15.4",
 		"global": "^4.3.2",
+		"hjs": "^0.0.6",
 		"mongoose": "^4.11.4",
 		"morgan": "^1.8.2",
 		"nodemon": "^1.17.4",
@@ -19,16 +24,17 @@
 		"passport-google-oauth": "^1.0.0",
 		"passport-google-oauth20": "^1.0.0",
 		"passport-local": "^1.0.0",
-		"react": "^15.6.2",
+		"react": "^16.3.2",
 		"react-bootstrap": "^0.32.1",
-		"react-dom": "^15.6.2",
-		"react-router-dom": "^4.1.2"
+		"react-dom": "^16.3.2",
+		"react-router-dom": "^4.1.2",
+		"webpack": "^4.8.3"
 	},
 	"devDependencies": {
 		"chai": "^4.1.2",
+		"chai-http": "^4.0.0",
 		"concurrently": "^3.5.0",
 		"mocha": "^5.2.0",
-		"chai-http": "^4.0.0",
 		"react-scripts": "1.0.7"
 	},
 	"scripts": {
@@ -38,7 +44,7 @@
 		"eject": "react-scripts eject",
 		"dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
 		"prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
-	    "serverTest": "mocha --timeout 10000"
+		"serverTest": "mocha --timeout 10000"
 	},
 	"proxy": "http://localhost:8080"
 }
