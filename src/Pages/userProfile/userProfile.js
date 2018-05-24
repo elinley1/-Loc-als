@@ -3,51 +3,36 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import { Col, Row, Grid } from "react-bootstrap";
-import { Input, TextArea, FormBtn } from "../components/Form";
 
-class UserProfile extends Component {
-    constructor () {
-        super()
-        this.state = {
-            local = this.state.local,
-            firstName = this.state.name,
-            lastName = this.state.name,
-            email = this.state.email,
-            cityDuration = this.state.cityDuration,
-            address= this.state.address,
-            businesses = [this.state.business]
-        }
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-    handle
+class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
 
-    handleSearch(event) {
-        event.preventDefault()
-        axios.get('api/v1/Business?query={"city":{"$regex":"^({this.state.city})"}}')
-        .then(response => {
-            console.log(response)
-            if (!response.data.errmsg) {
-                console.log('businesses found')
-                this.setState({
-                    business: []
-                })
-            } else {
-                console.log('none found')
-            }
-        })
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    render() {
-        if (this.state.re
-		return (
-			<Grid>
-				<h1>Hello, {this.user.firstName}! </h1>
-                <Row>
-                    <Col size="col-md-12">
-                        <div>
-                    </Col>
-                </Row>
-            </Grid>         
-    }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
 }
+
+export default UserProfile;

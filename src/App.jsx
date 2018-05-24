@@ -7,6 +7,7 @@ import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
 import Blogs from './Pages/Blog'
+import UserProfile from './Pages/userProfile/userProfile'
 import {Grid, Container} from 'react-bootstrap'
 
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap'; 
@@ -20,6 +21,11 @@ const DisplayLinks = props => {
 					<li className="nav-item">
 						<Link to="/" className="nav-link">
 							Home
+						</Link>
+					</li>
+					<li className="nav-item">
+						<Link to="/profile" className="nav-link">
+							Profile
 						</Link>
 					</li>
 					<li>
@@ -137,6 +143,7 @@ class App extends Component {
 				/>
 				<Route exact path ="/blogpost" component= {Blogs} />
 				<Route exact path="/signup" component={SignupForm} />
+				<Route exact path="/profile" component={UserProfile} />
 				{/* <LoginForm _login={this._login} /> */}
 
 						
