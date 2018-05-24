@@ -7,6 +7,7 @@ import { Col, Row, Grid } from "react-bootstrap";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       value: "",
       blogs: []

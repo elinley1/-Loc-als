@@ -75,6 +75,7 @@ class App extends Component {
 				})
 				window.sessionStorage.setItem( "userId", response.data.user._id );
 			} else {
+				console.log("THERE IS NOT USER")
 				this.setState({
 					loggedIn: false,
 					user: null
