@@ -7,12 +7,14 @@ import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
 import Blogs from './Pages/Blog'
+import {Grid, Container} from 'react-bootstrap'
 
 import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap'; 
 
 const DisplayLinks = props => {
+	var links = null;
 	if (props.loggedIn) {
-		return (
+		links = (
 			<nav className="navbar">
 				<ul className="nav">
 					<li className="nav-item">
@@ -29,7 +31,7 @@ const DisplayLinks = props => {
 			</nav>
 		)
 	} else {
-		return (
+		links = (
 			<nav className="navbar">
 				<ul className="nav">
 					<li className="nav-item">
@@ -51,6 +53,8 @@ const DisplayLinks = props => {
 			</nav>
 		)
 	}
+
+	return (<Grid>{ links }</Grid>)
 }
 
 class App extends Component {
@@ -116,12 +120,11 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<h1>This is the main App component</h1>
-				<Header user={this.state.user} />
 				{/* LINKS to our different 'pages' */}
 				<DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
 				{/*  ROUTES */}
 				{/* <Route exact path="/" component={Home} /> */}
+				
 				<Route exact path="/" render={() => <Home user={this.state.user} />} />
 				<Route
 					exact

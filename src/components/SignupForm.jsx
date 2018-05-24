@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button} from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row, Grid } from "react-bootstrap";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
 class SignupForm extends Component {
@@ -24,23 +24,22 @@ class SignupForm extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-		axios
-			.post('/api/v1/User', {
-				firstName: this.state.firstName,
-				lastName: this.state.lastName,
-				local: {
-					username: this.state.username,
-					password: this.state.password,
-				},
-				address: {
-					street: this.state.street,
-					city: this.state.city,
-					state: this.state.state,
-					zip: this.state.zip,
-				},
-				cityDuration: this.state.cityDuration,
-				email: this.state.email
-			})
+		axios.post('/api/v1/User', {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			local: {
+				username: this.state.username,
+				password: this.state.password,
+			},
+			address: {
+				street: this.state.street,
+				city: this.state.city,
+				state: this.state.state,
+				zip: this.state.zip,
+			},
+			cityDuration: this.state.cityDuration,
+			email: this.state.email
+		})
 			.then(response => {
 				console.log(response)
 				if (!response.data.errmsg) {
@@ -58,10 +57,10 @@ class SignupForm extends Component {
 			return <Redirect to={{ pathname: this.state.redirectTo }} />
 		}
 		return (
-			<Container>
+			<Grid>
 				<h1>Signup form</h1>
                 <Row>
-                    <Col size="col-md-6">
+                    <Col size="col-md-12">
                         <form>
                             <Input
                                 type="text"
@@ -144,7 +143,7 @@ class SignupForm extends Component {
                         </form>
                     </Col>
                 </Row>
-            </Container>
+            </Grid>
     	);
 	}
 }
