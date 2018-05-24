@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button } from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import {Label, Well, PageHeader, Col, Row, Grid } from "react-bootstrap";
+import {Panel, Label, Well, PageHeader, Col, Row, Grid } from "react-bootstrap";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class UserProfile extends React.Component {
     this.state = {
       searchTerm: "",
       blogs: [],
-      businesses: {}
+      businesses: {},
+      searchResultsBusinesses: []
     };
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,13 +27,14 @@ class UserProfile extends React.Component {
     this.setState({ searchTerm: event.target.value });
     let params = {
           params: {query: {
-            busName: {"$regex": "^(" + this.state.searchTerm + ")"}
+            busName: {"$regex": "(" + this.state.searchTerm + ")"}
           }
          }
         }
         console.log(params);
     axios.get('/api/v1/Business',params).then((response) => {
       console.log("Search response", response)
+      this.setState( {searchResultsBusinesses: response.data} );
     })    
   }
 
@@ -120,7 +122,7 @@ render() {
             {this.state.blogs.length ? this.state.blogs.map(blog => (
               <Well key={blog._id}>
                 <h4>{blog.title} <i>@ {this.getPostBusinessField(blog, "busName")}</i></h4>
-                <p>{blog.body}</p>
+                <p><quote>{blog.body}</quote></p>
                 Rating: <Label>{blog.rating}</Label>
               </Well>
             )) : <h3>You no have posts.</h3>}
@@ -132,6 +134,14 @@ render() {
         <label>
           Search: <input type="text" value={this.state.searchTerm} onChange={this.handleChangeSearch} />
         </label>
+            {this.state.searchResultsBusinesses.length ? this.state.searchResultsBusinesses.map(biz => (
+              <Panel key={biz._id}>
+                <Panel.Body>
+                  <h3><small>Name:</small> {biz.busName}</h3>
+                  <p><small>Description:</small> {biz.description}</p>
+                </Panel.Body>
+              </Panel>
+            )) : <h3>No Results</h3>}
       </Row> 
     </Grid>   
     </div>
