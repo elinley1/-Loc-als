@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import { FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button } from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Col, Row, Grid } from "react-bootstrap";
+import {Label, Well, PageHeader, Col, Row, Grid } from "react-bootstrap";
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
     this.state = {
-      value: "",
+      searchTerm: "",
       blogs: [],
       businesses: {}
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeSearch = this.handleChangeSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.render = this.render.bind(this);
   }
@@ -22,19 +22,28 @@ class UserProfile extends React.Component {
     this.getBlogs();
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChangeSearch(event) {
+    this.setState({ searchTerm: event.target.value });
+    let params = {
+          params: {query: {
+            busName: {"$regex": "^(" + this.state.searchTerm + ")"}
+          }
+         }
+        }
+        console.log(params);
+    axios.get('/api/v1/Business',params).then((response) => {
+      console.log("Search response", response)
+    })    
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    console.log("Event Submit", event)
     event.preventDefault();
   }
 
   getUsername() {
     return this.props.user ? this.props.user.local.username : "";
   }
-
 
   getEmail() {
     return this.props.user ? this.props.user.email : "";
@@ -84,25 +93,48 @@ class UserProfile extends React.Component {
 render() {
   return (
     <div>
-      <h1>Username: {this.getUsername()}</h1>
-      <h1>Email: {this.getEmail()}</h1>
-      <h1>Firstname: {this.getFirstname()}</h1>
-      <h1>Lastname: {this.getLastname()}</h1>
-    
-      <div>
-        <h2>Your Posts</h2>
+
+      <PageHeader>
+        <Grid>
+          <Row>
+            <Col md={12}>
+              <small>Happy Travels,</small> {this.getFirstname()}
+            </Col>
+          </Row>
+        </Grid>
+      </PageHeader>;
+    <Grid>
+      <Row>
+        <Col md={6}>
+        <h2>Personal Details</h2>
         <ul>
-          {this.state.blogs.length ? this.state.blogs.map(blog => (
-            <li key={blog._id}>
-              <p>{blog.title}</p>
-              <p>{blog.body}</p>
-              <p>{blog.raiting}</p>
-              <p>Business Name: {this.getPostBusinessField(blog, "busName")}</p>
-            </li>
-          )) : <h3>You no have posts.</h3>}
-        </ul>
-      </div> 
-    </div>   
+      <li>Username: {this.getUsername()}</li>
+      <li>Email: {this.getEmail()}</li>
+      <li>Firstname: {this.getFirstname()}</li>
+      <li>Lastname: {this.getLastname()}</li>
+      </ul>
+      </Col>
+
+      <Col md={6}>
+        <h2>Your Posts</h2>
+            {this.state.blogs.length ? this.state.blogs.map(blog => (
+              <Well key={blog._id}>
+                <h4>{blog.title} <i>@ {this.getPostBusinessField(blog, "busName")}</i></h4>
+                <p>{blog.body}</p>
+                Rating: <Label>{blog.rating}</Label>
+              </Well>
+            )) : <h3>You no have posts.</h3>}
+      </Col>
+      </Row>
+    
+      <Row>
+        
+        <label>
+          Search: <input type="text" value={this.state.searchTerm} onChange={this.handleChangeSearch} />
+        </label>
+      </Row> 
+    </Grid>   
+    </div>
   );
 };
 };
