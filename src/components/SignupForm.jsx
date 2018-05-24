@@ -24,20 +24,22 @@ class SignupForm extends Component {
 	}
 	handleSubmit(event) {
 		event.preventDefault()
-		// TODO - add validation
 		axios
-			.post('/auth/signup', {
+			.post('/api/v1/User', {
 				firstName: this.state.firstName,
 				lastName: this.state.lastName,
-				username: this.state.username,
-				password: this.state.password,
-				street: this.state.street,
-				city: this.state.city,
-				state: this.state.state,
-				zip: this.state.zip,
+				local: {
+					username: this.state.username,
+					password: this.state.password,
+				},
+				address: {
+					street: this.state.street,
+					city: this.state.city,
+					state: this.state.state,
+					zip: this.state.zip,
+				},
 				cityDuration: this.state.cityDuration,
 				email: this.state.email
-
 			})
 			.then(response => {
 				console.log(response)
@@ -138,9 +140,7 @@ class SignupForm extends Component {
 								onChange={this.handleChange}
 								placeholder="Email Address"
                             />
-                            <FormBtn>
-                                Submit
-                            </FormBtn>
+                            <Button onClick={this.handleSubmit}>Submit</Button>
                         </form>
                     </Col>
                 </Row>
