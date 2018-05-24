@@ -7,12 +7,17 @@ import { Col, Row, Grid } from "react-bootstrap";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
-    console.log("user profile props", props);
-
+    this.state = {
+      value: "",
+      blogs: []
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.render = this.render.bind(this);
+  }
+
+  componentDidMount () {
+    this.getBlogs();
   }
 
   handleChange(event) {
@@ -43,22 +48,15 @@ class UserProfile extends React.Component {
 
   getBlogs() {
     const userId = window.sessionStorage.getItem("userId");
-    return axios.post('/api/v1/Blog', {
-      title: this.state.title,
-      body: this.state.body,
-      rating: this.state.rating,
-      author: userId
-    }).then(response => {
-      console.log(response)
-      if (!response.data.errmsg) {
-        console.log('blog submited')
+    axios.get('/api/v1/Blog/')
+      .then(response => {
         this.setState({
-          redirectTo: '/'
-        })
-      } else {
-        console.log("err")
-      }
-    })
+          blogs: response.data
+        });
+      })
+      .catch(err => {
+        console.log( err );
+      });
   };
 
 render() {
@@ -70,8 +68,16 @@ render() {
       <h1>Lastname: {this.getLastname()}</h1>
     
       <div>
-        <ul>Your Blog Posts</ul>
-        <li>{this.getBlogs()}</li>
+        <h2>Your Posts</h2>
+        <ul>
+          {this.state.blogs.length ? this.state.blogs.map(blog => (
+            <li>
+              <p>{blog.title}</p>
+              <p>{blog.body}</p>
+              <p>{blog.raiting}</p>
+            </li>
+          )) : <h3>You no have posts.</h3>}
+        </ul>
       </div> 
     </div>   
   );
