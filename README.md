@@ -70,7 +70,7 @@ The idea is that you query for businesses that have a matching user field.
 ##Result Arrays
 
 Should be returned as follows:
-```
+
 USER
 ```
 firstName: { },
