@@ -7,10 +7,12 @@ import { Col, Row, Grid } from "react-bootstrap";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: ""};
+    console.log("user profile props", props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.render = this.render.bind(this);
   }
 
   handleChange(event) {
@@ -22,15 +24,31 @@ class UserProfile extends React.Component {
     event.preventDefault();
   }
 
+  getUsername() {
+      return this.props.user ? this.props.user.local.username : "";
+  }
+
+
+  getEmail() {
+      return this.props.user ? this.props.user.email : "";
+  }
+
+  getFirstname() {
+      return this.props.user ? this.props.user.firstName : "";
+  }
+
+  getLastname() {
+      return this.props.user ? this.props.user.lastName : "";
+  }
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <div>
+            <h1>Username: {this.getUsername()}</h1> 
+            <h1>Email: {this.getEmail()}</h1> 
+            <h1>Firstname: {this.getFirstname()}</h1> 
+            <h1>Lastname: {this.getLastname()}</h1> 
+      </div>
     );
   }
 }
