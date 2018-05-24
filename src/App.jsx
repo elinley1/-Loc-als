@@ -10,6 +10,7 @@ import Home from './components/Home'
 import Blogs from './Pages/Blog'
 import Navbar from './components/Navbar'
 import UserProfile from './Pages/userProfile/userProfile'
+import BusinessPage from './Pages/Business/businessPage'
 
 // const DisplayLinks = props => {
 // 	if (props.loggedIn) {
@@ -64,18 +65,15 @@ class App extends Component {
 		this._logout = this._logout.bind(this)
 		this._login = this._login.bind(this)
 	}
-	componentDidMount() {
+	componentWillMount() {
 		axios.get('/auth/user').then(response => {
-			console.log(response.data)
 			if (!!response.data.user) {
-				console.log('THERE IS A USER')
 				this.setState({
 					loggedIn: true,
 					user: response.data.user
 				})
 				window.sessionStorage.setItem( "userId", response.data.user._id );
 			} else {
-				console.log("THERE IS NOT USER")
 				this.setState({
 					loggedIn: false,
 					user: null
@@ -138,6 +136,7 @@ class App extends Component {
 				<Route exact path ="/blogpost" component= {Blogs} />
 				<Route exact path="/signup" component={SignupForm} />
 				<Route exact path="/profile" render={() => <UserProfile user={this.state.user} />} />
+				<Route exact path="/business/:id" render={(props) => <BusinessPage {...props} user={this.state.user} />}/>
 				{/* <LoginForm _login={this._login} /> */}
 
 			</div>

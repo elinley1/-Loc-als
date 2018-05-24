@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button } from 'react-bootstrap';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import {Panel, Label, Well, PageHeader, Col, Row, Grid } from "react-bootstrap";
+import { Panel, Label, Well, PageHeader, Col, Row, Grid } from "react-bootstrap";
+
+import { Link } from 'react-router-dom'
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -139,6 +141,10 @@ render() {
                 <Panel.Body>
                   <h3><small>Name:</small> {biz.busName}</h3>
                   <p><small>Description:</small> {biz.description}</p>
+
+      				 		<Link to={"/business/" + biz._id} className="nav-link">
+      				 			Details+
+      				 		</Link>
                 </Panel.Body>
               </Panel>
             )) : <h3>No Results</h3>}
