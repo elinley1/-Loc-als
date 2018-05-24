@@ -1,4 +1,4 @@
-let userId = "5b06f638ba627a29e691767a"
+let userId = "5b07108c2322cc2bd0a577d9"
 
 const axios = require('axios')
 .create({
@@ -7,7 +7,7 @@ const axios = require('axios')
 });
 
 axios.post("/api/v1/Business", {
-    busName: `my business #{userId}`,
+    busName: `Most Amazing Biz`,
     address: {
         street: "123 Imaginary Lane",
         city: "Atlanta",
@@ -18,16 +18,14 @@ axios.post("/api/v1/Business", {
     user: userId
 }).then(response => {
     console.log("Business -- Response", response)
-    if(response.state === 200) {
         console.log("Successfully created business")
         axios.post("/api/v1/Blog", {
             business: response.data._id,
-            title: "My Great Blog Post",
-            body: "Lorem ipsum it dolor",
+            title: "My 2nd Great Blog Post",
+            body: "Duo Lorem ipsum it dolor",
             rating: "Good",
             author: userId,
         }).then(r => {
             console.log("Blog -- response", r)
         })
-    }
 })

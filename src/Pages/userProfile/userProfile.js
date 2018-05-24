@@ -10,7 +10,8 @@ class UserProfile extends React.Component {
     console.log(props);
     this.state = {
       value: "",
-      blogs: []
+      blogs: [],
+      businesses: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,9 +49,25 @@ class UserProfile extends React.Component {
   }
 
   getBlogs() {
-    const userId = window.sessionStorage.getItem("userId");
+    const userId = this.props.user ? this.props.user._id : null;
     axios.get('/api/v1/Blog/')
       .then(response => {
+        let blogPosts = response.data;
+        let assocBusinessIds = blogPosts.map(p => { return {"_id": p.business }})
+        let assocBusinessQuery = {params: {query: {"$or": assocBusinessIds}} }
+        console.log(assocBusinessQuery);
+        axios.get("/api/v1/Business", assocBusinessQuery)
+          .then(bizResponse => {
+            let matchingBusinesses = bizResponse.data
+            var businessIdMap = {}
+            matchingBusinesses.forEach(biz => {
+              businessIdMap[biz._id] = biz
+            });
+            console.log(matchingBusinesses, businessIdMap)
+
+            this.setState({businesses: businessIdMap});
+          })
+
         this.setState({
           blogs: response.data
         });
@@ -59,6 +76,10 @@ class UserProfile extends React.Component {
         console.log( err );
       });
   };
+
+  getPostBusinessField(post, field) {
+    return this.state.businesses[post.business] ? this.state.businesses[post.business][field] : null
+  }
 
 render() {
   return (
@@ -72,10 +93,11 @@ render() {
         <h2>Your Posts</h2>
         <ul>
           {this.state.blogs.length ? this.state.blogs.map(blog => (
-            <li>
+            <li key={blog._id}>
               <p>{blog.title}</p>
               <p>{blog.body}</p>
               <p>{blog.raiting}</p>
+              <p>Business Name: {this.getPostBusinessField(blog, "busName")}</p>
             </li>
           )) : <h3>You no have posts.</h3>}
         </ul>
