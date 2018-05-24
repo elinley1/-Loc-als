@@ -67,7 +67,7 @@ class BusinessPage extends React.Component {
           </Col>
 
           <Col md={6}>
-            <h2>Your Posts</h2>
+            <h2>Posts</h2>
             {this.state.blogs.length ? this.state.blogs.map(blog => (
               <Well key={blog._id}>
                 <h4>{blog.title}</h4>
