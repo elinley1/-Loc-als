@@ -8,8 +8,8 @@ import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
 import Blogs from './Pages/Blog'
-<<<<<<< HEAD
 import Navbar from './components/Navbar'
+import UserProfile from './Pages/userProfile/userProfile'
 
 // const DisplayLinks = props => {
 // 	if (props.loggedIn) {
@@ -53,63 +53,6 @@ import Navbar from './components/Navbar'
 // 		)
 // 	}
 // }
-=======
-import UserProfile from './Pages/userProfile/userProfile'
-import {Grid, Container} from 'react-bootstrap'
-
-import {Nav, NavItem, Navbar, NavDropdown, MenuItem} from 'react-bootstrap'; 
-
-const DisplayLinks = props => {
-	var links = null;
-	if (props.loggedIn) {
-		links = (
-			<nav className="navbar">
-				<ul className="nav">
-					<li className="nav-item">
-						<Link to="/" className="nav-link">
-							Home
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link to="/profile" className="nav-link">
-							Profile
-						</Link>
-					</li>
-					<li>
-						<Link to="#" className="nav-link" onClick={props._logout}>
-							Logout
-						</Link>
-					</li>
-				</ul>
-			</nav>
-		)
-	} else {
-		links = (
-			<nav className="navbar">
-				<ul className="nav">
-					<li className="nav-item">
-						<Link to="/" className="nav-link">
-							Home
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link to="/login" className="nav-link">
-							login
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link to="/signup" className="nav-link">
-							sign up
-						</Link>
-					</li>
-				</ul>
-			</nav>
-		)
-	}
-
-	return (<Grid>{ links }</Grid>)
-}
->>>>>>> c598b39c44402f9743d5b6af30a286b5d3eb971b
 
 class App extends Component {
 	constructor() {
@@ -175,10 +118,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-<<<<<<< HEAD
 				{/* <Header user={this.state.user} /> */}
-=======
->>>>>>> c598b39c44402f9743d5b6af30a286b5d3eb971b
 				{/* LINKS to our different 'pages' */}
 				{/* <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
 				{/*  ROUTES */}
@@ -199,11 +139,6 @@ class App extends Component {
 				<Route exact path="/profile" render={() => <UserProfile user={this.state.user} />} />
 				{/* <LoginForm _login={this._login} /> */}
 
-<<<<<<< HEAD
-=======
-						
-
->>>>>>> c598b39c44402f9743d5b6af30a286b5d3eb971b
 			</div>
 		)
 	}
