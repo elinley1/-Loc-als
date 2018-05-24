@@ -1,0 +1,32 @@
+{
+  "name": "locales",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8080",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-restify-mongoose": "^4.3.0",
+    "mongoose": "^5.1.2",
+    "ra-data-json-server": "^2.0.0",
+    "react": "^16.4.0",
+    "react-admin": "^2.0.0",
+    "react-dom": "^16.4.0",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.4"
+  },
+  "scripts": {
+    "start": "export NODE_ENV=\"production\" && node server/server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
+    "prod": "export NODE_ENV=\"production\" && nodemon server/server.js",
+    "serverTest": "mocha --timeout 10000"
+  }
+}
