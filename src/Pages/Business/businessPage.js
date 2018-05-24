@@ -1,74 +1,64 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
+import { FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button } from 'react-bootstrap';
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import { Col, Row, Grid } from "react-bootstrap";
 
-import Jumbotron from "../../components/Jumbotron";
-import API from "/../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
-
-class BusinessPage extends Component {
-  state = {
-    blogs: [],
-    busName: "",
-    address: "",
-    email: "",
-    username: "",
-    description: ""
-  };
-
-  componentDidMount() {
-    this.loadBusinessPage();
+class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.render = this.render.bind(this);
   }
 
-  loadBusinessPage = () => {
-    API.getBusiness()
-      .then(res =>
-        this.setState({ blogs: res.data, busName: "", address: "", email: "", username: "", description: "" })
-      )
-      .catch(err => console.log(err));
-  };
 
-   render() {
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  getName() {
+    return this.props.business ? this.props.business.busName : "";
+  }
+
+  getStreet() {
+    return this.props.business ? this.props.business.address.street : "";
+  }
+
+  getCity() {
+    return this.props.business ? this.props.business.address.city : "";
+  }
+  getState() {
+    return this.props.business ? this.props.business.address.state : "";
+  }
+  getZip() {
+    return this.props.business ? this.props.business.address.zip : "";
+  }
+
+  getDescription() {
+    return this.props.business ? this.props.business.description : "";
+  }
+  render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>{this.business}</h1>
-            </Jumbotron>
-            <div>
-                <panel.heading>Address</panel.heading>
-                <panel.body>{this.state.address}</panel.body>
-                <panel.heading>Email</panel.heading>
-                <panel.body>{this.state.email}</panel.body>
-                <panel.heading>Username of "Owner"</panel.heading>
-                <panel.body>{this.state.username}</panel.body>
-                <panel.heading>Description</panel.heading>
-                <panel.body>{this.state.description}</panel.body>
-            </div>                
-            </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Blogs about this Business</h1>
-            </Jumbotron>
-            {this.state.blogs.length ? (
-              <ListGroupItem>
-                {this.state.blogs.map(blog => (
-                  <ListGroupItem key={blog._id} href={"/blogs/" + blogId}>
-                    
-                      <strong>
-                        {blog.title} by {blog.username}
-                      </strong>
-                      <div>
-                          {blog.body}
-                      </div>    
-                    </ListGroupItem>
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <h1>Business Name: {this.getName()}</h1>
+        <h1>Address: </h1>
+        <span> {this.getStreet} </span>
+        <span> {this.getCity} </span>
+        <span> {this.getState}, {this.getZip} </span>
+        <h1>Description: </h1>
+        <div> {this.getDescription()} </div>
+      </div>   
     );
-  }
-}
-
-export default BusinessPage;
+  };
+  };
+  export default UserProfile;
