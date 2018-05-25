@@ -64,8 +64,19 @@ class App extends Component {
 		}
 		this._logout = this._logout.bind(this)
 		this._login = this._login.bind(this)
+		this.render = this.render.bind(this)
+		this.updateUser()
 	}
+
 	componentWillMount() {
+		this.updateUser();
+	}
+
+	componentDidMount() {
+		this.updateUser();
+	}
+
+	updateUser() {
 		axios.get('/auth/user').then(response => {
 			if (!!response.data.user) {
 				this.setState({
@@ -139,7 +150,7 @@ class App extends Component {
 				}}/>
 				<Route exact path ="/blogpost" component= {Blogs} />
 				<Route exact path="/signup" component={SignupForm} />
-				<Route exact path="/profile" render={() => <UserProfile user={this.state.user} />} />
+				<Route exact path="/profile" render={() => <UserProfile userFn={ () => this.state.user} />} />
 				<Route exact path="/business/:id" render={(props) => <BusinessPage {...props} user={this.state.user} />}/>
 				{/* <LoginForm _login={this._login} /> */}
 

@@ -9,8 +9,9 @@ import { Link } from 'react-router-dom'
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log(this.props)
     this.state = {
+      user: this.props.userFn(),
       searchTerm: "",
       blogs: [],
       businesses: {},
@@ -26,8 +27,12 @@ class UserProfile extends React.Component {
     this.getBlogs();
   }
 
-  componentWillRecieveProps() {
-    this.getBlogs();
+  componentDidUpdate() {
+    if(this.state.user != this.props.userFn())
+    {
+      this.state.user = this.props.userFn()
+       this.getBlogs();
+     }
   }
 
   handleChangeSearch(event) {
@@ -62,7 +67,7 @@ class UserProfile extends React.Component {
         zip: this.state.businessZip
       },
       description: this.state.businessDescription,
-      user: this.props.user._id
+      user: this.state.user._id
     }
     console.log("New Biz Obj", newBusiness)
     axios.post("/api/v1/Business", newBusiness)
@@ -81,23 +86,23 @@ class UserProfile extends React.Component {
   }
 
   getUsername() {
-    return this.props.user ? this.props.user.local.username : "";
+    return this.state.user ? this.state.user.local.username : "";
   }
 
   getEmail() {
-    return this.props.user ? this.props.user.email : "";
+    return this.state.user ? this.state.user.email : "";
   }
 
   getFirstname() {
-    return this.props.user ? this.props.user.firstName : "";
+    return this.state.user ? this.state.user.firstName : "";
   }
 
   getLastname() {
-    return this.props.user ? this.props.user.lastName : "";
+    return this.state.user ? this.state.user.lastName : "";
   }
 
   getBlogs() {
-    const userId = this.props.user ? this.props.user._id : null;
+    const userId = this.state.user ? this.state.user._id : null;
     console.log("Author ID", userId)
     axios.get('/api/v1/Blog/', {params: {query: {author: userId}}})
       .then(response => {
