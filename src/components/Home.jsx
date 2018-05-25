@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
+import LogoImage from '../logo.png'
 class Home extends Component {
 	render(){
 		return(
@@ -10,7 +10,7 @@ class Home extends Component {
       				<div className="cta-content">
 						<div className="container">
           					<h2>Travel.Explore.</h2>
-							 <div> <img src="/img/logo.png" /> </div>
+							 <div> <img src={LogoImage} /> </div>
 							 <br/>
 							 <div>
 
