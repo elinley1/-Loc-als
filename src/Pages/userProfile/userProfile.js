@@ -26,6 +26,10 @@ class UserProfile extends React.Component {
     this.getBlogs();
   }
 
+  componentWillRecieveProps() {
+    this.getBlogs();
+  }
+
   handleChangeSearch(event) {
     this.setState({ searchTerm: event.target.value });
     let params = {
@@ -94,7 +98,8 @@ class UserProfile extends React.Component {
 
   getBlogs() {
     const userId = this.props.user ? this.props.user._id : null;
-    axios.get('/api/v1/Blog/')
+    console.log("Author ID", userId)
+    axios.get('/api/v1/Blog/', {params: {query: {author: userId}}})
       .then(response => {
         let blogPosts = response.data;
         let assocBusinessIds = blogPosts.map(p => { return {"_id": p.business }})
