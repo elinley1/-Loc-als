@@ -113,3 +113,7 @@ firstName: { },
 * In development mode (i.e. `npm run dev`), OAuth google callback is not being proxied to the google servers. Therefore in order to test the google OAuth on your local machine do the following:
 1) `npm run build`
 2) `npm run prod`
+
+##Heroku Link
+
+Link to deployed page @[https://fathomless-mesa-83420.herokuapp.com/].
