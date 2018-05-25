@@ -121,8 +121,6 @@ class BusinessPage extends React.Component {
               </FormGroup>
 
               <Button bsStyle="success" onClick={this.handleSubmit} type="submit">Message</Button>
-
-
             </form>
 
             <h2>Your Posts</h2>

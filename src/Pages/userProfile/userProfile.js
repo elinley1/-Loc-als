@@ -17,6 +17,7 @@ class UserProfile extends React.Component {
       searchResultsBusinesses: []
     };
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.render = this.render.bind(this);
   }
@@ -40,9 +41,39 @@ class UserProfile extends React.Component {
     })    
   }
 
+  handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+    })
+  }
+
   handleSubmit(event) {
-    console.log("Event Submit", event)
     event.preventDefault();
+    let newBusiness = {
+      busName: this.state.businessName,
+      address: {
+        street: this.state.businessStreet,
+        city: this.state.businessCity,
+        state: this.state.businessState,
+        zip: this.state.businessZip
+      },
+      description: this.state.businessDescription,
+      user: this.props.user._id
+    }
+    console.log("New Biz Obj", newBusiness)
+    axios.post("/api/v1/Business", newBusiness)
+      .then(response => {
+        console.log("New Business Response", response)
+        alert("Created new business " + newBusiness.busName);
+        this.setState({
+          businessName: "",
+          businessStreet: "",
+          businessCity: "",
+          businessState: "",
+          businessZip: "",
+          businessDescription: ""
+        })
+      })
   }
 
   getUsername() {
@@ -132,7 +163,8 @@ render() {
       </Row>
     
       <Row>
-        
+      <Col md={6}>
+       <h1>Find A Business</h1> 
         <label>
           Search: <input type="text" value={this.state.searchTerm} onChange={this.handleChangeSearch} />
         </label>
@@ -148,6 +180,86 @@ render() {
                 </Panel.Body>
               </Panel>
             )) : <h3>No Results</h3>}
+      </Col>
+
+      <Col md={6}>
+        <h1>Register a business</h1>
+            <form>
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>Business Name</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.businessName}
+                  name="businessName"
+                  placeholder="Name"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>Address</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.businessStreet}
+                  name="businessStreet"
+                  placeholder="Street"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>City</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.businessCity}
+                  name="businessCity"
+                  placeholder="City"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>State</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.businessState}
+                  name="businessState"
+                  placeholder="State"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>Zip</ControlLabel>
+                <FormControl
+                  type="text"
+                  value={this.state.businessZip}
+                  name="businessZip"
+                  placeholder="Zip"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup
+                controlId="formBasicText" >
+                <ControlLabel>Description</ControlLabel>
+                <FormControl
+                  componentClass="textarea"
+                  value={this.state.businessDescription}
+                  name="businessDescription"
+                  placeholder="Description"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <Button bsStyle="success" onClick={this.handleSubmit} type="submit">Register</Button>
+            </form>
+      </Col>
+
       </Row> 
     </Grid>   
     </div>
