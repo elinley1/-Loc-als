@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import './App.css'
 import LoginForm from './components/Login/LoginForm'
 import SignupForm from './components/SignupForm'
@@ -82,8 +82,7 @@ class App extends Component {
 		})
 	}
 
-	_logout(event) {
-		event.preventDefault()
+	_logout() {
 		console.log('logging out')
 		axios.post('/auth/logout').then(response => {
 			console.log(response.data)
@@ -122,6 +121,7 @@ class App extends Component {
 				{/* <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
 				{/*  ROUTES */}
 				{/* <Route exact path="/" component={Home} /> */}
+				<Navbar user={this.state.user}/>
 				
 				<Route exact path="/" render={() => <Home user={this.state.user} />} />
 				<Route
@@ -133,6 +133,10 @@ class App extends Component {
 							_googleSignin={this._googleSignin}
 						/>}
 				/>
+				<Route exact path="/logout" render={() => {
+					this._logout()
+					return (<Redirect to="/"/>)
+				}}/>
 				<Route exact path ="/blogpost" component= {Blogs} />
 				<Route exact path="/signup" component={SignupForm} />
 				<Route exact path="/profile" render={() => <UserProfile user={this.state.user} />} />

@@ -1,34 +1,26 @@
-// import {Navbar} from 'react-bootstrap';
+import React, {Component} from 'react'
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
-// const Navbar = (
+const NavbarComponent = (props) => (
 
-// <Navbar inverse collapseOnSelect>
-//   <Navbar.Header>
-//     <Navbar.Brand>
-//       <a href="#brand">React-Bootstrap</a>
-//     </Navbar.Brand>
-//     <Navbar.Toggle />
-//   </Navbar.Header>
-//   <Navbar.Collapse>
-//     <Nav>
-//       <NavItem eventKey={1} href="#">
-//         Link
-//       </NavItem>
-//       <NavItem eventKey={2} href="#">
-//         Link
-//       </NavItem>
-//     </Nav>
-//     <Nav pullRight>
-//       <NavItem eventKey={1} href="#">
-//         SignUp
-//       </NavItem>
-//       <NavItem eventKey={2} href="#">
-//         Login
-//       </NavItem>
-//     </Nav>
-//   </Navbar.Collapse>
-// </Navbar>
+    <Navbar>
+        <Navbar.Header>
+            <Navbar.Brand>
+                <Link to="/" className="nav-link">(Loc)als</Link>
+            </Navbar.Brand>
+        </Navbar.Header>
+        <Nav>
 
-// );
+            <NavItem eventKey={1} href="#">
+                {props.user ? (<Link to="/profile" className="nav-link">Dashboard</Link>) : (<Link to="/login" className="nav-link">Login</Link>)}
+            </NavItem>
+            <NavItem eventKey={2} href="#">
+                {props.user ? (<Link to="/logout" className="nav-link">Logout</Link>) : (<Link to="/signup" className="nav-link">Sign Up</Link>)}
+            </NavItem>
+        </Nav>
+    </Navbar>
 
-// export default Navbar
+);
+
+export default NavbarComponent
