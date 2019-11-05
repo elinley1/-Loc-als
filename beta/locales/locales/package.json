@@ -9,7 +9,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-restify-mongoose": "^4.3.0",
-    "mongoose": "^5.1.2",
+    "mongoose": "^5.7.5",
     "ra-data-json-server": "^2.0.0",
     "react": "^16.4.0",
     "react-admin": "^2.0.0",
